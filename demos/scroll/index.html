@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<script src="../../build/aui/aui.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" href="../../build/aui-skin-classic/css/aui-skin-classic-all-min.css" type="text/css" media="screen" />
+
+	<style type="text/css" media="screen">
+		body {
+			font-size: 12px;
+		}
+
+		p, li {
+			font-size: larger;
+		}
+
+		#wrapper {
+			padding: 10px;
+		}
+
+		#demo {
+			display: block;
+			width: 100%;
+		}
+
+		.data {
+			background-color: #CCCCFF;
+			float: left;
+			font-family: Helvetica, sans-serif;
+			height: 150px;
+			margin: 20px;
+			overflow: auto;
+			overflow-x: hidden;
+			padding: 5px;
+			width: 200px;
+		}
+
+		.data ul {
+			margin-bottom: 0;
+			margin-top: 0;
+		}
+
+		.loading {
+			display: block;
+			background-image: url(../../resources/docs/themes/default/assets/img/spinner.gif);
+			background-position: center center;
+			background-repeat: no-repeat;
+			font-style: italic;
+			margin-left: 25px;
+		}
+
+		.loading.loaded {
+			display: none;
+		}
+
+	</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+	<h1>Alloy - Continuous Scroll Demo</h1>
+
+	<div id="demo">
+		<h2>Intial Data: 20 elements</h2>
+
+		<h3>Try continuous scrolling</h3>
+
+		<div class="data">
+			<ul>
+				<li data-id="1">Data 1</li>
+				<li data-id="2">Data 2</li>
+				<li data-id="3">Data 3</li>
+				<li data-id="4">Data 4</li>
+				<li data-id="5">Data 5</li>
+				<li data-id="6">Data 6</li>
+				<li data-id="7">Data 7</li>
+				<li data-id="8">Data 8</li>
+				<li data-id="9">Data 9</li>
+				<li data-id="10">Data 10</li>
+				<li data-id="11">Data 11</li>
+				<li data-id="12">Data 12</li>
+				<li data-id="13">Data 13</li>
+				<li data-id="14">Data 14</li>
+				<li data-id="15">Data 15</li>
+				<li data-id="16">Data 16</li>
+				<li data-id="17">Data 17</li>
+				<li data-id="18">Data 18</li>
+				<li data-id="19">Data 19</li>
+				<li data-id="20">Data 20</li>
+			</ul>
+		</div>
+
+		<span class="loading loaded">Loading...</span>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+AUI().ready('aui-scroll', function(A) {
+	var demo = A.one('#demo');
+
+	var data = demo.one('.data');
+
+	var loadingNode = demo.one('.loading');
+
+	var loading = false;
+
+	data.plug(
+		A.Scroll,
+		{
+			tolerance: '50px'
+		}
+	);
+
+	data.scroll.on(
+		'down-edge',
+		function(event) {
+			if (!loading) {
+				var itemList = data.one('ul');
+
+				data.append(loadingNode);
+
+				loadingNode.removeClass('loaded');
+
+				setTimeout(
+					function() {
+						var lastChild = data.one('li:last-child');
+
+						var index = 1;
+
+						for (index; index < 6; index++) {
+							var id = parseInt(lastChild.attr('data-id')) + index;
+
+							itemList.append('<li data-id="' + id + '">Data ' + id + '</li>');
+						}
+
+						loadingNode.addClass('loaded');
+
+						loading = false;
+
+					},
+					500
+				);
+
+				loading = true;
+			}
+		}
+	);
+});
+</script>
+
+</body>
+</html>
