@@ -65,7 +65,8 @@ Y.mix(YUI.Env[Y.version].modules, {
             "aui-node",
             "aui-component",
             "querystring-stringify-simple"
-        ]
+        ],
+        "skinnable": true
     },
     "aui-autocomplete-deprecated": {
         "requires": [
@@ -774,14 +775,11 @@ Y.mix(YUI.Env[Y.version].modules, {
     },
     "aui-node-base": {
         "requires": [
-            "node-base",
-            "node-style",
-            "node-pluginhost",
-            "node-screen",
             "array-extras",
             "aui-base-lang",
             "aui-classnamemanager",
-            "aui-debounce"
+            "aui-debounce",
+            "node"
         ]
     },
     "aui-node-html5": {
@@ -977,7 +975,7 @@ Y.mix(YUI.Env[Y.version].modules, {
             "io-form",
             "overlay",
             "aui-scheduler-base",
-            "aui-toolbar"
+            "aui-popover"
         ],
         "skinnable": true
     },
@@ -1344,4 +1342,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '90db517b2f1100ef66d19686d7984258';
+YUI.Env[Y.version].md5 = 'e27fa2a4410ef4e9a22e3a6411a197b0';
