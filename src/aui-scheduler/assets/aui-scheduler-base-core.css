@@ -164,7 +164,7 @@
   position: absolute;
   top: 0;
   width: 95%;
-  z-index: 400;
+  z-index: 1;
 }
 
 .scheduler-today {
